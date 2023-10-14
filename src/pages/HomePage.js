@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { fetchMovies } from '../services/app.js';
-import {MovieCard} from '../components/MovieCard/MovieCard.js'
+import MovieLink from '../components/MovieCard/MovieLink.js';
+
+import Loader from '../components/Loader/Loader.js';
 
 export const HomePage = () => {
 
@@ -24,23 +26,30 @@ export const HomePage = () => {
         
     }, [])
 
-    console.log(movies);
-    console.log(isLoading)
+    // console.log(movies);
+    // console.log(isLoading)
 
     return (
-        <div>
-            
-            {(movies !== null) && movies.map(movie => {
-                return (<MovieCard
-                    key={movie.id}
-                    img={movie.poster_path}
-                    title = {movie.title}
+        <main>
+            {(isLoading && <Loader />) || (<ul>
                     
-                />)
-            })}
+                {(movies !== null) && movies.map(movie => {
+                    return (
+                        <MovieLink
+                            key={movie.id}
+                            id={movie.id}
+                            title={movie.original_title ? movie.original_title : movie.name}
+                            
+                        />
+
+                    )
+                })}
+
+                    
 
 
-        </div>
+            </ul >)}
+        </main>
     )
 }
 
