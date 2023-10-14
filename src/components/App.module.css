@@ -1,0 +1,15 @@
+nav{
+    display: flex;
+    gap: 24px;
+}
+
+.headerNawLink{
+    font-size: 40px;
+    gap: 16px;
+    color: blue;
+    text-decoration: none;
+}
+
+.headerNawLink.active {
+    color: rgb(90, 44, 90);
+}
