@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/143.76ee5a1b.chunk.css","mappings":"AAEA,uBACI,cACJ,CAEA,8BAEI,cACJ","sources":["components/Review/Reviews.module.css"],"sourcesContent":["\n\n.review{\n    padding: 12px 0;\n}\n\n.reviewContent{\n    margin: 0px;\n    margin-top: 4px;\n}"],"names":[],"sourceRoot":""}
