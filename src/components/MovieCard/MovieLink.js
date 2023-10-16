@@ -1,13 +1,13 @@
 import React from 'react';
 
 import { Link } from 'react-router-dom';
-
-export const MovieLink = ({id, title }) => {
+import css from './MovieCard.module.css';
+const MovieLink = ({id, title, location }) => {
     return (
        
 
         <li>
-            <Link to={`/movies/${id}`} >{title}</Link>    
+            <Link to={`/movies/${id}`} state={{ from: location }} className={css.movieLink}>{title}</Link>    
         </li>
     )
 }

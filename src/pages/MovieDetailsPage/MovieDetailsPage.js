@@ -1,12 +1,13 @@
 import MovieDetails from 'components/MovieDetails/MovieDetails';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchMovieDetails } from 'services/app';
-import { Link, Outlet } from 'react-router-dom';
-import Loader from '../components/Loader/Loader.js';
-
-export const MovieDetailsPage = () => {
-
+import { Link, Outlet, useLocation  } from 'react-router-dom';
+import Loader from '../../components/Loader/Loader.js';
+import css from './MovieDetailsPages.module.css';
+const MovieDetailsPage = () => {
+    const location = useLocation();
+    const backLinck = useRef(location.state?.from ?? "/");
     const { movieId } = useParams();
     const [isLoading, setLoading] = useState(false);
     const [movieDetails, setMovieDetails] = useState(null)
@@ -17,7 +18,7 @@ export const MovieDetailsPage = () => {
             try {
                 setLoading(true);
                 const data = await fetchMovieDetails(movieId);
-                // console.log(data);
+                console.log(data);
                 setMovieDetails(data);
                 
                 
@@ -30,23 +31,30 @@ export const MovieDetailsPage = () => {
     }, [movieId])
     
     return (
-        (isLoading&&<Loader/>) ||(<main>
+        (isLoading && <Loader />) || (<main className={css.container}>
+            <li className={css.goBack}>
+               <Link to={backLinck.current} className={css.goBackLink}>Go Back</Link>
+
+            </li>
+
             {movieDetails && <MovieDetails
+                
                 poster={movieDetails.poster_path}
+                scores={movieDetails.vote_average}
                 title={movieDetails.original_title ? movieDetails.original_title : movieDetails.name}
                 year={movieDetails.release_date}
                 overview={movieDetails.overview}
                 genres={movieDetails.genres.map(genre => { return genre.name })}
             />}
             {isLoading&&<Loader/>}
-            <div>
-                <b>Informations</b>
-                <ul>
-                    <li>
-                        <Link to={'cast'} >Cast</Link>    
+            <div className={css.informations}>
+                <b>Additional informations</b>
+                <ul className={css.informationsList}>
+                    <li >
+                        <Link to={'cast'} className={css.informLink}>Cast</Link>    
                     </li>
-                    <li>
-                        <Link to={'reviews'} >Reviews</Link>    
+                    <li >
+                        <Link to={'reviews'} className={css.informLink}>Reviews</Link>    
                     </li>
                 </ul>
                 <Outlet/>

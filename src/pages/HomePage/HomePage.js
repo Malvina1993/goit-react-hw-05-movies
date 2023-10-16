@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { fetchMovies } from '../services/app.js';
-import MovieLink from '../components/MovieCard/MovieLink.js';
+import { fetchMovies } from '../../services/app.js';
+import MovieLink from '../../components/MovieCard/MovieLink.js';
+import {useLocation  } from 'react-router-dom';
+import Loader from '../../components/Loader/Loader.js';
+import css from './HomePage.module.css';
 
-import Loader from '../components/Loader/Loader.js';
-
-export const HomePage = () => {
-
+const HomePage = () => {
+       
+    const location = useLocation();
     const [movies, setMovies] = useState(null);
     const [isLoading, setLoading] = useState(false);
 
@@ -26,12 +28,12 @@ export const HomePage = () => {
         
     }, [])
 
-    // console.log(movies);
-    // console.log(isLoading)
+    
 
     return (
         <main>
-            {(isLoading && <Loader />) || (<ul>
+            <h1 className={css.titleHome}>Trending today</h1>
+            {(isLoading && <Loader />) || (<ul className={css.trandMovieList}>
                     
                 {(movies !== null) && movies.map(movie => {
                     return (
@@ -39,6 +41,7 @@ export const HomePage = () => {
                             key={movie.id}
                             id={movie.id}
                             title={movie.original_title ? movie.original_title : movie.name}
+                            location = {location}
                             
                         />
 

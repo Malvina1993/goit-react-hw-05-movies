@@ -1,0 +1,12 @@
+.movieDetails {
+    display: flex;
+    padding: 12px;
+    padding-top: 0;
+    gap: 24px;
+    border-bottom: solid 1.5px;
+    border-color: rgb(177, 173, 173);
+}
+
+.poster{
+    width: 200px;
+}

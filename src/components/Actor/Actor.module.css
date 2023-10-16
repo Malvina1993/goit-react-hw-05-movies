@@ -1,0 +1,13 @@
+p{
+    margin: 0;
+}
+
+.artistCard{
+    max-width: 120px;
+    padding: 12px 0px 0px 0px;
+    
+}
+
+.artistPoster{
+    width: 124px;
+}

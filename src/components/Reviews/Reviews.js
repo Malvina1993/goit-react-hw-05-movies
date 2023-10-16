@@ -5,7 +5,7 @@ import Review from '../Review/Review.js'
 import Loader from '../Loader/Loader.js'
 
 
-export const Reviews = () => {
+const Reviews = () => {
     const { movieId } = useParams();
     const [isLoading, setLoading] = useState(false);
     const [movieReviews, setMovieRevievs] = useState([]);
@@ -32,13 +32,13 @@ export const Reviews = () => {
     // console.log(isLoading);
     return (
        (isLoading&&<Loader/>)||(   <div>
-            {movieReviews && movieReviews.map(review => {
+            {(movieReviews.length === 0 && <p>We don't have any reviews for this movie</p>) || (movieReviews.map(review => {
                 return <Review
-                    key = {review.id}
-                    author={review.author }
+                    key={review.id}
+                    author={review.author}
                     content={review.content}
                 />
-            })}
+            }))} 
        </div>)
     )
 }

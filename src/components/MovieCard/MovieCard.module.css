@@ -1,3 +1,11 @@
-.imageCover{
-    width: 64px;
+.movieLink{
+    text-decoration: none;
+    color: rgb(29, 29, 95);
+    font-size: 18px;
+}
+
+.movieLink:hover,
+.movieLink:focus {
+    text-decoration: underline;
+    color: rgb(90, 44, 90);
 }

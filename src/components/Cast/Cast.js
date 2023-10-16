@@ -5,7 +5,8 @@ import { useParams } from 'react-router-dom';
 import Actor from '../Actor/Actor.js'
 import Loader from '../Loader/Loader.js'
 
-export const Cast = () => {
+import css from './Cast.module.css'
+const Cast = () => {
 
     const { movieId } = useParams();
     const [isLoading, setLoading] = useState(false);
@@ -31,7 +32,7 @@ export const Cast = () => {
 
     return (
        
-       (isLoading&&<Loader/>) ||( <div >
+       (isLoading&&<Loader/>) ||( <div className={css.cast}>
             {movieCasts && movieCasts.map(cast => {
                 return <Actor
                     key={ cast.id}

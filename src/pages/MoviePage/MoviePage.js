@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useLocation  } from 'react-router-dom';
 import { fetchMovieByQuery } from 'services/app';
-import Loader from '../components/Loader/Loader.js';
-import MovieLink from '../components/MovieCard/MovieLink.js';
-
-export const MoviePage = () => {
+import Loader from '../../components/Loader/Loader.js';
+import MovieLink from '../../components/MovieCard/MovieLink.js';
+import css from './MoviePage.module.css'
+const MoviePage = () => {
 
     const [searchParams, setSearchParam] = useSearchParams();
-    
+    const location = useLocation();
     const query = searchParams.get('query')
 
     const [isLoading, setLoading] = useState(false);
@@ -33,14 +33,14 @@ export const MoviePage = () => {
         e.preventDefault();
         const searchValue = e.currentTarget.elements.searchMovie.value;
         console.log(searchValue);
-        setSearchParam({query: searchValue})
+        setSearchParam({ query: searchValue });
+        e.currentTarget.elements.searchMovie.value = '';
     }
 
     return (
-        <main>
-            <form onSubmit={handleFormSubmit}>
-                <p></p>
-                <input tupe="text" name="searchMovie" required />
+        <main className={css.container}>
+            <form onSubmit={handleFormSubmit} className={css.searchForm}>
+                <input className={css.inputSearchForm}  tupe="text" name="searchMovie" required />
                 <button tupe="submit">Search</button>
             </form>
 
@@ -52,7 +52,7 @@ export const MoviePage = () => {
                             key={movie.id}
                             id={movie.id}
                             title={movie.original_title ? movie.original_title : movie.name}
-                    
+                            location = {location}
                         />
 
                     )

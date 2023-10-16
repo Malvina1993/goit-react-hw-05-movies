@@ -1,11 +1,13 @@
 import { Puff } from 'react-loader-spinner';
 import React from 'react';
-
+import css from './Loader.module.css'
 
 
 const Loader = () => {
     return (
-        <Puff
+        <div className={css.loader}>
+            <Puff
+            
             height="80"
             width="80"
             radius={1}
@@ -15,6 +17,7 @@ const Loader = () => {
             wrapperClass=""
             visible={true}
         />
+        </div>
     )
 };
 
